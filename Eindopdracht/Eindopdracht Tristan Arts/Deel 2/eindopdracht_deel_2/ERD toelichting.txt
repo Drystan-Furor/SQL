@@ -1,0 +1,54 @@
+________________________________________________________________________
+Artikel en Bestelling
+________________________________________________________________________
+Artikel 0:n Bestellingen
+Een artikel kan op meer dan één bestelling voorkomen, maar kan ook niet besteld zijn
+
+Bestelling 1:1 Artikel
+Als er een bestelling wordt gedaan, dan staat er 1 artikel op, anders is er geen besteld artikel
+Een Bestelling is altijd van 1 artikel, maar een factuur kan meer bestellingen hebben
+-------------------------------------------------------------------------
+Artikelen bestaan ook zonder bestelling, dus NOT IDENTIFYING RELATIONSHIP
+-------------------------------------------------------------------------
+
+
+
+
+________________________________________________________________________
+Klant en Factuur
+________________________________________________________________________
+Klant 0:n Factuur
+Een klant bestaat ook zonder bestelling,
+Dan heeft een klant 0 facturen
+Een klant kan meerdere facturen krijgen, als hij meerdere bestellingen heeft
+
+Factuur 1:1 Klant
+Als een klant bestelt krijg hij 1 factuur van die bestelling, een bestelling kan meer artikelen hebben.
+-------------------------------------------------------------------------
+Klanten bestaan ook zonder Factuur, dus NOT IDENTIFYING RELATIONSHIP
+-------------------------------------------------------------------------
+
+
+
+
+________________________________________________________________________
+Factuur en Bestelling
+________________________________________________________________________
+Factuur heeft 1:n Bestelling
+Een factuur bestaat als er een bestelling plaatsvind.
+Er kunnen wel meer bestellingen gedaan worden die op 1 factuur staan.
+Je vult je winkelwagen, loopt naar de kassa, krijgt 1 bon/factuur
+
+Bestelling staat op 1:1 Factuur 
+Als je iets besteld, krijg je daar 1 factuur van, niet meerdere, dus een bestelling komt maar op 1 factuur voor, en alleen die factuur.
+Als iemand nog iets besteld, of een tweede keer hetzelfde product is dat een andere bestel regel.
+-------------------------------------------------------------------------
+Factuur en Bestelling bestaan niet zonder elkaar, dus IDENTIFYING RELATIONSHIP
+-------------------------------------------------------------------------
+
+
+________________________________________________________________________
+Bestelling heeft een n:m relatie met Artikel en Factuur en is de tussenentiteit
+________________________________________________________________________
+
+

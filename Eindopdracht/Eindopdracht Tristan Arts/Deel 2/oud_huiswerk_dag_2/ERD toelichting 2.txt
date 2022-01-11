@@ -1,0 +1,150 @@
+[Klantenbestand] 1-1 [Woon_adres]
+    [Woon_adres] 1-1 [Klantenbestand]
+
+Klant ALTIJD woon adres
+maar er kunnen twee klanten op 1 adres wonen, 
+ADRES != uniek bij klant.
+klantID == UQ ID : elke klant IS uniek
+KlantID NN; unieke identifier VEREIST
+Woon_adres NN; daklozen mogen gewoon naar de winkel komen, 
+	maar het wordt moelijker om een bestelling te leveren.
+Database kan wel zoeken en sorteren op adressen zonder de klant naam te weten dankzij Woon_Adres
+Ik kan zoeken naar iedereen in Stad X
+Ik kan zoeken naar iedereeen op straat Y
+Ik kan zoeken naar iedereeen met POSTCODE AA
+
+
+
+[Klantenbestand] 1-n [Factuur_adres]
+
+klantID kan >1 bestellingen hebben, dus ook >1 factuur
+Ik bestel { vandaag & morgen } 2 dagen, 2 bestellingen [factuur 1 nog in de post onderweg]
+
+
+
+[Factuur_adres] 1-1 [Klantenbestand] 
+
+Factuur heeft ALTIJD klant,
+0 klant == 0 bestellingen == 0 factuur
+1 klant >= 1 bestellingen >= 1 factuur
+Dus klant krijgt altijd een factuur bij 1
+
+
+
+[Klantenbestand] 1-n [Bezorg_adres]
+Pieter-Jan Derksma besteld voor 3 adressen
+2 taarten naar kantoor - kantine
+2 taarten naar de sportvereniging
+1 taart naar huis
+Klant KAN dus >1 Bezorgadres hebben
+
+
+
+[Bezorg_adres] 1-1 [Klantenbestand]
+Als iemand besteld MOET ik leveren
+klant kan zeggen waar
+klant kan niet bestellen zonder bezorging
+ALS klant besteld DAN aflever/bezorg adres
+
+
+
+[Factuur_adres] 1-1 [Factuur]
+      [Factuur] 1-1 [Factuur_adres]
+
+Factuur ALTIJD verstuurd
+Verstuurd ALTIJD naar een adres
+factuuradres != woon adres, althans niet altijd
+Ik zit op kantoor, hun zijn sponsor van de sport vereniging
+Ik bestel 20 vlaaien voor de sportvereniging
+Ik woon niet op kantoor.                                  [KlantID + woon_adres != factuur_adres]
+Ik wil de factuur op kantoor, als sponsor.                [factuur adres != woon adres && factuur_adres != bezorg_adres]
+Ik wil de vlaaien op de sportvereniging geleverd hebben.  [Bezorg_adres]
+
+
+
+  [Bestelling] 1-1 [Bezorg_adres]
+[Bezorg_adres] 1-1 [Bestelling]
+
+Bestelling ALTIJD Bezorgen OP adres
+Geen bestelling == geen bezorging
+1 bestelling === 1 bezorging
+zelfde verhouding als factuur, in die zin, woon, factuur en bestel adres zijn 3 entiteiten
+alle 3 kunnen hetzelfde zijn, maar alle 3 kunnen anders zijn.
+
+
+
+	[Prijs] 1-1 / [Artikel] 1-n
+artikel ALTIJD een prijs
+prijs ALTIJD een artikel
+	MAAR
+verschillende PRODUCTEN kunnen zelfde prijs
+bijv: koffie OF thee voor €2.20
+dus PRIJS heeft 1 OF >1 artikelen
+Uitleg:
+
+[Artikel] 1:1 [Prijs]
+Mijn Appeltaart is niet gratis
+Mijn Appeltaart kost € 3,- [1 Artikel 1 Prijs]
+Mijn Appeltaart kost € 5,- [Niet logisch, dus 1 Artikel != n Prijs]
+
+[Prijs] 1-n [Artikel]
+Andersom wel logisch
+Koffie kost €2,20
+Thee kost   €2,20
+Product A === Prijs X
+Product B === Prijs X
+1 prijs kan dus vaker voorkomen bij verschillende artikelen
+
+
+
+[Bestelling] 1-n [Artikel]
+Een bestelling heeft zeker 1 artikel anders bestelling == 0
+Een bestelling kan >1 artikel hebben
+10 mensen kunnen appeltaart bestellen
+Appeltaart dus op 10 bestellingen [elke bestelling is uniek]
+1 mens kan 10 aappeltaarten bestellen [bestelling UQ, Artikelen >1]
+10 appeltaart dus op 1 bestelling
+Kortom:
+Artikelen zijn meervoud op Bestelling
+Maar niet iedereen koopt appeltaart, maar iets anders
+
+
+
+[Artikel] 1-0 [Bestelling]
+Artikelen uit asortiment, zonder artikelen geen verkoop
+ALS klant => bestelling
+DAN Bestelling >= 1, nooit == 0
+maar als ik verkoop Koffie EN Thee
+en klant koopt 1 koffie, 0 Thee
+Heb ik nog steeds Thee als artikel bestaan op 0 bestellingen
+Dus Artikel is WEL (1) of NIET (0) op UQ bestelling
+
+
+
+[Klantenbestand] 0-n [Bestelling]
+Klanten KUNNEN bestellen
+Dus Bestelling KAN ook 0 zijn
+Klanten kunnen ook >= 1 bestellen
+ALS ik op vakantie ben, heb ik 0 bestellingen graag
+D.W.Z. 0 Bestellingen === 0 Klanten
+Na de vakantie heb ik het druk
+1 klant >= 1 bestellingen [Pieter-Jan Derksma Besteld 5x op 1 dag]
+Ik heb 100 UQ klanten en 200 UQ Bestellingen
+
+
+
+[Bestelling] 1-1 [Klantenbestand]
+Zonder klant geen bestelling,
+Wij gaan geen taart leveren aan mensen die er niet om hebben gevraagd
+een bestelling is DOOR && VAN een klant
+dus 1 bestelling == 1 klant
+[Pieter-Jan Derksma Besteld 5x op 1 dag]
+5 UQ bestellingen && 1 UQ klant = 5 facturen(+ adres) + 5 bezorgadressen
+dat 2 bestellingen naar de sportclub gaan,
+dat 2 bestellingen naar de kantoor-kantine gaan
+dat 1 bestellingen naar huis adres gaan
+maakt voor Database niet uit
+Zeker, Pieter-Jan Derksma heeft 5 bestellingen op 3 adressen,
+dat is zijn probleem, wij leveren elke bestelling op de gewenste adres
+en sturen de rekening waar jij maar wilt,
+dat mag ook thuis zijn

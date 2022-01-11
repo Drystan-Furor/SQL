@@ -1,0 +1,20 @@
+De inhoud van deze map is de huiswerkopdracht van:
+Databases Les 2
+
+Tristan Arts
+
+de ERD zit in "huiswerk ERD.mwb" en is voor MySQL Workbench
+ERD toelichting.txt bevat mijn notities per cardinaliteit van het schema
+
+stroken schema_NotNull.png is een standaard afbeeldings formaat, 
+maar mochten er problemen zijn tover ik het wel om ij een JPEG
+
+De afbeelding zelf bevat mijn strokenschema voor de opdracht, gebasseerd op de ERD
+In het schema heb ik de Not Null's aangegeven met text blokken in kleur codering en 
+koppel lijnen:
+
+voorbeeld: rode vak in schema, 
+volgt een lijn naar blok NOT NULL 
+volgt een lijn naar blok text => uitleg
+van alle rode vakken,
+zo ook voor de andere kleuren.

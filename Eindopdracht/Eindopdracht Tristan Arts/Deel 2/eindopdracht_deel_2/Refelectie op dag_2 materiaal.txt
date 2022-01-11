@@ -1,0 +1,29 @@
+Nu ik terugkijk naar wat ik gemaakt heb in les 2, met de kennis die ik vergaard heb, 
+zie ik dat ik vaker dubble data had.
+Daarom ben ik even vanaf 0 begonnen en heb de opdracht een tweede keer gemaakt, 
+om zo het verschil duidelijker te zien over hoe ik het nu zou aanpakken.
+Dit maakt het ook duidelijker, want mijn nieuwe/herziene ERD + Strokenschema vormen de structuur van
+de nieuwe database.
+
+Op dit moment zie ik dat ik er met 4 tabellen kan afronden waar ik voorheen meer tabellen nodig had.
+Ook weet ik nu dat ik met SQL alleen de verbinding tussen data leg op 1 KEY Value.
+
+Waar ik in les 2 nog dact: ik moet optioneel email hebben bij klant
+Dan heb ik optioneel email bij factuur,
+Die ik dan ophaal uit de klant tabel... 
+
+Weet ik nu, dat wanneer ik factuur PRIMARY KEY verbind met Klant PRIMARY KEY:
+Ik altijd via klant bij de optionele email zou kunnen komen.
+Hetzelfde geld voor de andere waardes. Ik hoef data geen twee keer in de database te hebben,
+mits ik de juiste verbeinding (FOREIGN KEY) leg.
+
+Tevens heb ik nu alle pijlen in de juiste richting staan en is de primary key altijd het eerste veld van de tabel.
+Daarbij merk ik ook dat de logica van Child table WIJST NAAR Parent Table nu beter begrijp.
+Want: ik maak een tabel met data.
+ik maak een tweede tabel met data.
+Veld x van T2 [FOREIGN KEY] komt overeen met Veld y van T1[PRIMARY KEY].
+Ik match de [herhaalde maar identieke] data van T2, met bestaande data van T1.
+
+Bij opdracht 2 dacht ik nog, DIT moet DAAR ook voorkomen, daarom had ik de pijlen ook in de verkeerde richting staan.
+Bijgevolg kon ik mijn strokenschema niet herzien, of direct reflectie geven, 
+dus heb ik hem nogmaals gemaakt om te kunnen zien wat werkelijk anders is.
